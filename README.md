@@ -1,4 +1,4 @@
-# TruthLens
+# Sach
 
 AI-powered misinformation detection platform that verifies claims against retrieved evidence using RAG (Retrieval Augmented Generation).
 

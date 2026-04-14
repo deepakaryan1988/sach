@@ -1,12 +1,12 @@
-class TruthLensError(Exception):
+class SachError(Exception):
     pass
 
 
-class RetrievalError(TruthLensError):
+class RetrievalError(SachError):
     pass
 
 
-class LLMError(TruthLensError):
+class LLMError(SachError):
     pass
 
 
@@ -18,7 +18,7 @@ class OpenRouterError(LLMError):
     pass
 
 
-class ConfigurationError(TruthLensError):
+class ConfigurationError(SachError):
     pass
 
 

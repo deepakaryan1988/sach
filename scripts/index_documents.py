@@ -59,9 +59,7 @@ def load_documents_from_file(file_path: str) -> list:
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Index documents for TruthLens retrieval"
-    )
+    parser = argparse.ArgumentParser(description="Index documents for Sach retrieval")
     parser.add_argument("--documents", "-d", help="Path to JSON file with documents")
     parser.add_argument(
         "--list", "-l", action="store_true", help="List sample documents"

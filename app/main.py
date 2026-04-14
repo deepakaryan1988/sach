@@ -12,7 +12,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="TruthLens",
+    title="Sach",
     description="AI-powered misinformation detection platform",
     version="0.1.0",
     lifespan=lifespan,
