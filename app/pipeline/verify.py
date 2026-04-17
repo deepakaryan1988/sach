@@ -174,7 +174,7 @@ class VerificationPipeline:
         is_official, claimant_type, official_note = await official_task
 
         # STEP 2: Multi-region live search with reformulated queries
-        max_results = min(8, config.retrieval_top_k * 2)
+        max_results = config.search_max_results
         all_sources: List[Source] = []
         seen_urls: set = set()
         combined_independence: Dict = {}

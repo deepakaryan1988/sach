@@ -41,14 +41,6 @@ class Config:
                 config[key] = val.strip()
 
     @property
-    def ollama_base_url(self) -> str:
-        return self._config["ollama"]["base_url"]
-
-    @property
-    def ollama_model(self) -> str:
-        return self._config["ollama"]["model"]
-
-    @property
     def openrouter_api_key(self) -> str:
         return self._config["openrouter"]["api_key"]
 
@@ -61,12 +53,8 @@ class Config:
         return self._config["openrouter"].get("model") or "meta-llama/llama-3.3-70b-instruct:free"
 
     @property
-    def retrieval_index_path(self) -> str:
-        return self._config["retrieval"]["index_path"]
-
-    @property
-    def retrieval_top_k(self) -> int:
-        return self._config["retrieval"]["top_k"]
+    def search_max_results(self) -> int:
+        return self._config.get("search", {}).get("max_results", 8)
 
     @property
     def app_host(self) -> str:
