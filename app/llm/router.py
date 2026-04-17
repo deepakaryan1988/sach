@@ -14,29 +14,16 @@ class LLMRouter:
         self.nvidia_client = NvidiaClient()
 
     async def generate(self, prompt: str, force_cloud: bool = False) -> tuple[str, str]:
-        if force_cloud:
-            try:
-                result = await self.cloud_client.generate(prompt)
-                return result, "cloud"
-            except LLMError:
-                # Fallback to Nvidia if cloud (OpenRouter) fails
-                try:
-                    result = await self.nvidia_client.generate(prompt)
-                    return result, "nvidia"
-                except LLMError:
-                    raise
-
-        # Sequence: Local -> OpenRouter -> Nvidia
+        # Sequence: OpenRouter -> Nvidia
         try:
-            result = await self.local_client.generate(prompt)
-            return result, "local"
+            result = await self.cloud_client.generate(prompt)
+            return result, "cloud"
         except LLMError:
             try:
-                result = await self.cloud_client.generate(prompt)
-                return result, "cloud"
-            except LLMError:
                 result = await self.nvidia_client.generate(prompt)
                 return result, "nvidia"
+            except LLMError:
+                raise
 
     async def generate_swarm(self, prompt: str, openrouter_models: list[str], nvidia_models: list[str]) -> list[str]:
         tasks = []
@@ -54,14 +41,6 @@ class LLMRouter:
             else:
                 valid_results.append(str(result))
         
-        if not valid_results:
-            print("Swarm completely failed. Falling back to Local Ollama.")
-            try:
-                local_res = await self.local_client.generate(prompt)
-                valid_results.append(str(local_res))
-            except Exception as e:
-                print(f"Local fallback failed: {e}")
-                
         return valid_results
 
     async def close(self) -> None:

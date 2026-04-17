@@ -88,7 +88,7 @@ class VerificationPipeline:
                 truth_score=0.0,
                 verdict="Error",
                 sources=sources,
-                explanation="### System Warning\nAll upstream AI models are currently rate-limited or offline. The Swarm Consensus failed to boot.\n\n*Please ensure your local `Ollama` instance is running in the background, or retry later when OpenRouter free tier limits reset.*",
+                explanation="### System Warning\nAll upstream AI models (OpenRouter and NVIDIA) are currently rate-limited or offline.\n\n*Please ensure your API keys are valid and you have remaining credits/quota.*",
                 rhetoric_score=rhetoric_score,
                 swarm_agreement=0.0,
                 analysis_details=analysis_details,
