@@ -92,6 +92,10 @@ class Config:
     def nvidia_swarm(self) -> str:
         return self._config.get("models", {}).get("nvidia_swarm", "")
 
+    @property
+    def fact_check_api_key(self) -> str:
+        return self._config.get("google", {}).get("fact_check_api_key", "")
+
 
 def get_config() -> Config:
     return Config()

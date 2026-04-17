@@ -22,3 +22,6 @@ nvidia:
 models:
   openrouter_swarm: "${OPENROUTER_MODELS}"
   nvidia_swarm: "${NVIDIA_MODELS}"
+
+google:
+  fact_check_api_key: "${GOOGLE_FACT_CHECK_API_KEY}"
