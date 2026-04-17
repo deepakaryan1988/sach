@@ -1,0 +1,206 @@
+{
+  "communities": {
+    "0": [
+      "node_02f4e6bd"
+    ],
+    "1": [
+      "node_04c6e90f"
+    ],
+    "2": [
+      "node_06fe0f80"
+    ],
+    "3": [
+      "node_0c5fd515"
+    ],
+    "4": [
+      "node_2c6d8d0a"
+    ],
+    "5": [
+      "node_43aa69c0"
+    ],
+    "6": [
+      "node_484d21a9"
+    ],
+    "7": [
+      "node_498cf53d"
+    ],
+    "8": [
+      "node_51067854"
+    ],
+    "9": [
+      "node_54d6d728"
+    ],
+    "10": [
+      "node_57d2d8af"
+    ],
+    "11": [
+      "node_592f86d0"
+    ],
+    "12": [
+      "node_625efbbf"
+    ],
+    "13": [
+      "node_6aff6d60"
+    ],
+    "14": [
+      "node_8bee66f8"
+    ],
+    "15": [
+      "node_959ad7ec"
+    ],
+    "16": [
+      "node_9c91fdc0"
+    ],
+    "17": [
+      "node_a672862f"
+    ],
+    "18": [
+      "node_a97d684b"
+    ],
+    "19": [
+      "node_aa346f86"
+    ],
+    "20": [
+      "node_b0eaf5ef"
+    ],
+    "21": [
+      "node_b42f1ccb"
+    ],
+    "22": [
+      "node_b4ef698d"
+    ],
+    "23": [
+      "node_b8e56f46"
+    ],
+    "24": [
+      "node_bc5441b4"
+    ],
+    "25": [
+      "node_c89bc9b1"
+    ],
+    "26": [
+      "node_c9b08962"
+    ],
+    "27": [
+      "node_d0b03805"
+    ],
+    "28": [
+      "node_d26475bf"
+    ],
+    "29": [
+      "node_d6751efd"
+    ],
+    "30": [
+      "node_d9a3f73c"
+    ],
+    "31": [
+      "node_dff2be01"
+    ],
+    "32": [
+      "node_f08ab71d"
+    ],
+    "33": [
+      "node_f4c05149"
+    ],
+    "34": [
+      "node_f5348d4f"
+    ]
+  },
+  "cohesion": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0,
+    "4": 1.0,
+    "5": 1.0,
+    "6": 1.0,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0
+  },
+  "gods": [
+    {
+      "id": "node_a672862f",
+      "label": "__init__",
+      "degree": 0
+    },
+    {
+      "id": "node_0c5fd515",
+      "label": "faiss_manager",
+      "degree": 0
+    },
+    {
+      "id": "node_f5348d4f",
+      "label": "retrieval",
+      "degree": 0
+    },
+    {
+      "id": "node_a97d684b",
+      "label": "search",
+      "degree": 0
+    },
+    {
+      "id": "node_d6751efd",
+      "label": "verify",
+      "degree": 0
+    },
+    {
+      "id": "node_959ad7ec",
+      "label": "nvidia",
+      "degree": 0
+    },
+    {
+      "id": "node_c89bc9b1",
+      "label": "openrouter",
+      "degree": 0
+    },
+    {
+      "id": "node_2c6d8d0a",
+      "label": "__init__",
+      "degree": 0
+    },
+    {
+      "id": "node_06fe0f80",
+      "label": "router",
+      "degree": 0
+    },
+    {
+      "id": "node_8bee66f8",
+      "label": "ollama",
+      "degree": 0
+    }
+  ],
+  "surprises": [],
+  "questions": [
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `__init__`, `faiss_manager`, `retrieval` to the rest of the system?",
+      "why": "35 weakly-connected nodes found - possible documentation gaps or missing edges."
+    }
+  ]
+}

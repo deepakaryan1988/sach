@@ -19,7 +19,7 @@ class OpenRouterClient(LLMInterface):
     def provider(self) -> str:
         return "cloud"
 
-    async def generate(self, prompt: str) -> str:
+    async def generate(self, prompt: str, model_override: str = None) -> str:
         if not self.api_key:
             raise OpenRouterError(
                 "OpenRouter API key is not configured. Set OPENROUTER_API_KEY in .env"
@@ -29,7 +29,7 @@ class OpenRouterClient(LLMInterface):
             "Content-Type": "application/json",
         }
         payload: Dict[str, Any] = {
-            "model": self.model,
+            "model": model_override or self.model,
             "messages": [{"role": "user", "content": prompt}],
         }
         try:

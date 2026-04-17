@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@100..700,0..1,0,24&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .glass-card {
+        background: rgba(34, 38, 43, 0.5);
+        backdrop-filter: blur(30px);
+        position: relative;
+    }
+    .glass-card::after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 1px;
+        background: linear-gradient(to right, rgba(255,255,255,0.05), rgba(255,255,255,0));
+    }
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glow-dot {
+        box-shadow: 0 0 15px rgba(170, 255, 220, 0.6);
+    }
+}
+
+body {
+  min-height: max(884px, 100dvh);
+}

@@ -19,11 +19,11 @@ def test_openrouter_client_provider():
     assert client.provider == "cloud"
 
 
-def test_llm_response_parsing():
+def test_judge_response_parsing():
     from app.pipeline.verify import VerificationPipeline
 
     pipeline = VerificationPipeline()
-    score, verdict, explanation = pipeline._parse_llm_response(
+    score, verdict, explanation = pipeline._parse_judge_response(
         '{"truth_score": 0.85, "verdict": "Likely True", "explanation": "Test reasoning."}'
     )
     assert score == 0.85
@@ -31,11 +31,11 @@ def test_llm_response_parsing():
     assert explanation == "Test reasoning."
 
 
-def test_llm_response_parsing_fallback():
+def test_judge_response_parsing_fallback():
     from app.pipeline.verify import VerificationPipeline
 
     pipeline = VerificationPipeline()
-    score, verdict, explanation = pipeline._parse_llm_response("Invalid response")
+    score, verdict, explanation = pipeline._parse_judge_response("Invalid response")
     assert score == 0.5
     assert verdict == "Uncertain"
     assert explanation == "Invalid response"

@@ -12,7 +12,7 @@ class OllamaClient(LLMInterface):
         config = get_config()
         self.base_url = base_url or config.ollama_base_url
         self.model = model or config.ollama_model
-        self.client = httpx.AsyncClient(timeout=60.0)
+        self.client = httpx.AsyncClient(timeout=httpx.Timeout(3.0, connect=2.0))
 
     @property
     def provider(self) -> str:
@@ -32,7 +32,7 @@ class OllamaClient(LLMInterface):
             response.raise_for_status()
             data = response.json()
             return data.get("response", "").strip()
-        except httpx.ConnectError as e:
+        except (httpx.ConnectError, httpx.TimeoutException) as e:
             raise OllamaConnectionError(
                 f"Failed to connect to Ollama at {self.base_url}: {e}"
             )

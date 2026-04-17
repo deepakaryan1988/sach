@@ -1,0 +1,104 @@
+{
+  "communities": {
+    "0": [
+      "app_config_py",
+      "config_app_host",
+      "config_app_port",
+      "config_nvidia_api_key",
+      "config_nvidia_base_url",
+      "config_nvidia_swarm",
+      "config_ollama_base_url",
+      "config_ollama_model",
+      "config_openrouter_api_key",
+      "config_openrouter_base_url",
+      "config_openrouter_model",
+      "config_openrouter_swarm",
+      "config_retrieval_index_path",
+      "config_retrieval_top_k"
+    ],
+    "1": [
+      "app_pipeline_embedding_py",
+      "embedding_embeddingmodel",
+      "embedding_embeddingmodel_encode",
+      "embedding_embeddingmodel_encode_query",
+      "embedding_embeddingmodel_fit",
+      "embedding_embeddingmodel_init",
+      "embedding_embeddingmodel_load",
+      "embedding_embeddingmodel_save"
+    ],
+    "2": [
+      "config_config",
+      "config_config_load_config",
+      "config_config_new",
+      "config_config_resolve_env_vars",
+      "config_get_config"
+    ],
+    "3": [
+      "app_handleanalyze",
+      "app_resetanalysis",
+      "web_app_src_app_tsx",
+      "web_app_src_main_tsx"
+    ],
+    "4": [
+      "app_main_py",
+      "main_lifespan"
+    ],
+    "5": [
+      "web_app_tailwind_config_js"
+    ],
+    "6": [
+      "web_app_eslint_config_js"
+    ],
+    "7": [
+      "web_app_vite_config_ts"
+    ],
+    "8": [
+      "web_app_postcss_config_js"
+    ],
+    "9": [
+      "app_init_py"
+    ]
+  },
+  "cohesion": {
+    "0": 0.14,
+    "1": 0.25,
+    "2": 0.6,
+    "3": 0.5,
+    "4": 1.0,
+    "5": 1.0,
+    "6": 1.0,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0
+  },
+  "gods": [
+    {
+      "id": "embedding_embeddingmodel",
+      "label": "EmbeddingModel",
+      "degree": 7
+    },
+    {
+      "id": "config_config",
+      "label": "Config",
+      "degree": 5
+    },
+    {
+      "id": "config_get_config",
+      "label": "get_config()",
+      "degree": 2
+    }
+  ],
+  "surprises": [],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Config` connect `Community 2` to `Community 0`?",
+      "why": "High betweenness centrality (0.068) - this node is a cross-community bridge."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.14 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

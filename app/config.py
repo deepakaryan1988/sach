@@ -34,7 +34,11 @@ class Config:
                 and value.endswith("}")
             ):
                 env_var = value[2:-1]
-                config[key] = os.getenv(env_var, "")
+                val = os.getenv(env_var, "").strip()
+                # Remove quotes if present
+                if (val.startswith('"') and val.endswith('"')) or (val.startswith("'") and val.endswith("'")):
+                    val = val[1:-1]
+                config[key] = val.strip()
 
     @property
     def ollama_base_url(self) -> str:
@@ -54,7 +58,7 @@ class Config:
 
     @property
     def openrouter_model(self) -> str:
-        return self._config["openrouter"]["model"]
+        return self._config["openrouter"].get("model") or "meta-llama/llama-3.3-70b-instruct:free"
 
     @property
     def retrieval_index_path(self) -> str:
@@ -71,6 +75,22 @@ class Config:
     @property
     def app_port(self) -> int:
         return self._config["app"]["port"]
+
+    @property
+    def nvidia_api_key(self) -> str:
+        return self._config.get("nvidia", {}).get("api_key", "")
+
+    @property
+    def nvidia_base_url(self) -> str:
+        return self._config.get("nvidia", {}).get("base_url", "https://integrate.api.nvidia.com/v1")
+
+    @property
+    def openrouter_swarm(self) -> str:
+        return self._config.get("models", {}).get("openrouter_swarm", "")
+
+    @property
+    def nvidia_swarm(self) -> str:
+        return self._config.get("models", {}).get("nvidia_swarm", "")
 
 
 def get_config() -> Config:

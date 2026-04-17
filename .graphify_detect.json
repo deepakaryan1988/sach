@@ -1,0 +1,63 @@
+{
+  "files": {
+    "code": [
+      "web-app/tailwind.config.js",
+      "web-app/eslint.config.js",
+      "web-app/vite.config.ts",
+      "web-app/postcss.config.js",
+      "web-app/src/App.tsx",
+      "web-app/src/main.tsx",
+      "app/config.py",
+      "app/__init__.py",
+      "app/main.py",
+      "app/pipeline/embedding.py",
+      "app/pipeline/__init__.py",
+      "app/pipeline/faiss_manager.py",
+      "app/pipeline/retrieval.py",
+      "app/pipeline/search.py",
+      "app/pipeline/verify.py",
+      "app/llm/nvidia.py",
+      "app/llm/openrouter.py",
+      "app/llm/__init__.py",
+      "app/llm/router.py",
+      "app/llm/ollama.py",
+      "app/llm/base.py",
+      "app/core/__init__.py",
+      "app/core/exceptions.py",
+      "app/models/responses.py",
+      "app/models/__init__.py",
+      "app/models/requests.py",
+      "app/api/__init__.py",
+      "app/api/routes.py",
+      "tests/test_llm.py",
+      "tests/__init__.py",
+      "tests/test_api.py",
+      "tests/test_pipeline.py",
+      "scripts/__init__.py",
+      "scripts/index_documents.py"
+    ],
+    "document": [
+      "requirements.txt",
+      "README.md",
+      "AGENTS.md",
+      "web-app/README.md",
+      "docs/design.md",
+      "graphify-out/GRAPH_REPORT.md"
+    ],
+    "paper": [],
+    "image": [
+      "web-app/public/icons.svg",
+      "web-app/public/favicon.svg",
+      "web-app/src/assets/hero.png",
+      "web-app/src/assets/vite.svg",
+      "web-app/src/assets/react.svg"
+    ],
+    "video": []
+  },
+  "total_files": 45,
+  "total_words": 9753,
+  "needs_graph": false,
+  "warning": "Corpus is ~9,753 words - fits in a single context window. You may not need a graph.",
+  "skipped_sensitive": [],
+  "graphifyignore_patterns": 0
+}
