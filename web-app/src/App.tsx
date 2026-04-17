@@ -38,6 +38,8 @@ export default function App() {
     setError("");
   };
 
+  const si = result?.source_independence;
+
   return (
     <div className="dark min-h-screen bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary-fixed overflow-x-hidden relative">
       
@@ -87,7 +89,7 @@ export default function App() {
                 </div>
                 <div className="space-y-2">
                     <h3 className="text-xl font-headline font-bold text-primary tracking-widest text-[#aaffdc]">ANALYSING</h3>
-                    <p className="text-sm text-on-surface-variant max-w-[250px] mx-auto">Evaluating multi-agent consensus and mapping source contradictions...</p>
+                    <p className="text-sm text-on-surface-variant max-w-[250px] mx-auto">Searching 3 regions, detecting circular reporting, querying swarm consensus...</p>
                 </div>
             </div>
         )}
@@ -112,8 +114,41 @@ export default function App() {
                     <p className="text-lg leading-relaxed font-light italic text-on-surface/90">
                     "{claim}"
                     </p>
+                    {/* Official Claim Badge */}
+                    {result.is_official_claim && (
+                      <div className="mt-3 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 w-fit">
+                        <span className="material-symbols-outlined text-amber-400 text-base" style={{ fontVariationSettings: "'FILL' 1" }}>account_balance</span>
+                        <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest">Official / Political Claim</span>
+                      </div>
+                    )}
                 </div>
                 </section>
+
+                {/* Narrative Divergence Alert */}
+                {si?.narrative_divergence && (
+                  <section className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 flex items-start gap-3">
+                    <span className="material-symbols-outlined text-amber-400 text-xl mt-0.5 flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>swap_horiz</span>
+                    <div>
+                      <p className="text-xs font-bold text-amber-400 uppercase tracking-widest mb-1">Narrative Divergence Detected</p>
+                      <p className="text-[11px] text-on-surface/70 leading-relaxed">
+                        Indian/domestic sources and international sources report <strong className="text-on-surface">different versions</strong> of this story. This is a common indicator of state-influenced media narratives.
+                      </p>
+                    </div>
+                  </section>
+                )}
+
+                {/* Circular Reporting Alert */}
+                {si?.single_origin_warning && (
+                  <section className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 flex items-start gap-3">
+                    <span className="material-symbols-outlined text-orange-400 text-xl mt-0.5 flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>cycle</span>
+                    <div>
+                      <p className="text-xs font-bold text-orange-400 uppercase tracking-widest mb-1">Circular Reporting Risk</p>
+                      <p className="text-[11px] text-on-surface/70 leading-relaxed">
+                        Over 50% of sources trace back to <strong className="text-on-surface">{si.dominant_domain || "one domain"}</strong>. Multiple articles may be echoing a single original source, not providing independent confirmation.
+                      </p>
+                    </div>
+                  </section>
+                )}
 
                 {/* Truth Verdict Card */}
                 <section className="relative py-8">
@@ -133,11 +168,43 @@ export default function App() {
                 </div>
                 </section>
 
+                {/* Source Independence Report */}
+                {si && (
+                  <section className="space-y-4">
+                    <h3 className="text-xs font-bold tracking-[0.15em] text-on-surface-variant uppercase">Source Intelligence</h3>
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="bg-surface-container-low p-4 rounded-lg text-center border border-transparent hover:border-primary/20 transition-colors">
+                        <span className="block text-2xl font-headline font-bold text-primary">{si.unique_domains || 0}</span>
+                        <span className="block text-[9px] font-bold text-on-surface-variant uppercase tracking-tighter mt-1">Unique Sources</span>
+                      </div>
+                      <div className="bg-surface-container-low p-4 rounded-lg text-center border border-transparent hover:border-primary/20 transition-colors">
+                        <span className="block text-2xl font-headline font-bold text-primary">{si.region_coverage?.length || 0}</span>
+                        <span className="block text-[9px] font-bold text-on-surface-variant uppercase tracking-tighter mt-1">Regions</span>
+                      </div>
+                      <div className={`bg-surface-container-low p-4 rounded-lg text-center border border-transparent hover:border-error/20 transition-colors`}>
+                        <span className={`block text-2xl font-headline font-bold ${(si.govt_aligned_ratio || 0) > 0.4 ? 'text-error' : 'text-on-surface/60'}`}>
+                          {((si.govt_aligned_ratio || 0) * 100).toFixed(0)}%
+                        </span>
+                        <span className="block text-[9px] font-bold text-on-surface-variant uppercase tracking-tighter mt-1">Govt-Wire</span>
+                      </div>
+                    </div>
+                    {si.region_coverage && si.region_coverage.length > 0 && (
+                      <div className="flex gap-2 flex-wrap">
+                        {si.region_coverage.map((region: string, idx: number) => (
+                          <span key={idx} className="text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                            {region}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </section>
+                )}
+
                 {/* Editorial Explanation */}
                 <section className="space-y-6">
                 <div className="space-y-4 max-w-[95%]">
                     <h3 className="text-xs font-bold tracking-[0.15em] text-on-surface-variant uppercase">Swarm Brain Breakdown</h3>
-                    <div className="text-sm text-on-surface/90 leading-relaxed font-light [&>h3]:text-primary [&>h3]:text-xs [&>h3]:mt-6 [&>h3]:mb-2 [&>h3]:uppercase [&>h3]:tracking-widest [&>p]:mb-4 overflow-y-auto max-h-[300px] pr-2 border-l border-outline-variant/20 pl-4">
+                    <div className="text-sm text-on-surface/90 leading-relaxed font-light [&>h3]:text-primary [&>h3]:text-xs [&>h3]:mt-6 [&>h3]:mb-2 [&>h3]:uppercase [&>h3]:tracking-widest [&>p]:mb-4 [&>ul]:mb-4 [&>ul]:pl-4 [&>li]:mb-1 overflow-y-auto max-h-[300px] pr-2 border-l border-outline-variant/20 pl-4">
                        <ReactMarkdown>{result.explanation}</ReactMarkdown>
                     </div>
                 </div>
@@ -193,10 +260,33 @@ export default function App() {
                         {result.sources.map((src: any, idx: number) => {
                             const urlMatch = src.content.match(/URL:\s*(http[^\n]+)/);
                             const url = urlMatch ? urlMatch[1].trim() : "#";
-                            const snippet = src.content.replace(/URL:.*?\nSnippet:\s*/, "");
+                            const regionMatch = src.title.match(/\[(India|International|UK\/Europe)\]/);
+                            const region = regionMatch ? regionMatch[1] : null;
+                            const isGovtWire = src.title.includes("GOVT-WIRE");
+                            const isFactCheck = src.title.includes("Fact Check");
+                            const snippetMatch = src.content.match(/(?:Snippet|Article excerpt):\s*([\s\S]*)/);
+                            const snippet = snippetMatch ? snippetMatch[1].trim().substring(0, 200) : src.title;
+
+                            let borderColor = "border-primary/40";
+                            if (isFactCheck) borderColor = "border-blue-400/60";
+                            else if (isGovtWire) borderColor = "border-amber-500/40";
+
                             return (
-                                <a key={idx} href={url} target="_blank" rel="noreferrer" className="block p-4 bg-surface-container-high rounded-lg text-sm border-l-2 border-primary/40 hover:bg-surface-variant transition-colors group cursor-pointer">
-                                    <span className="font-bold block text-primary mb-1 group-hover:underline">{src.title}</span>
+                                <a key={idx} href={url} target="_blank" rel="noreferrer" className={`block p-4 bg-surface-container-high rounded-lg text-sm border-l-2 ${borderColor} hover:bg-surface-variant transition-colors group cursor-pointer`}>
+                                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                                      <span className="font-bold text-primary group-hover:underline text-xs leading-tight flex-1">{src.title}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                                      {region && (
+                                        <span className="text-[8px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-primary/10 text-primary">{region}</span>
+                                      )}
+                                      {isGovtWire && (
+                                        <span className="text-[8px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400">Govt Wire</span>
+                                      )}
+                                      {isFactCheck && (
+                                        <span className="text-[8px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-400">IFCN Fact Check</span>
+                                      )}
+                                    </div>
                                     <span className="text-on-surface-variant text-xs line-clamp-2">{snippet}</span>
                                 </a>
                             );

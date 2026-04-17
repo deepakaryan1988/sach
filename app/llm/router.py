@@ -1,15 +1,12 @@
 import asyncio
 
 from app.core.exceptions import LLMError
-from app.llm.base import LLMInterface
-from app.llm.ollama import OllamaClient
 from app.llm.openrouter import OpenRouterClient
 from app.llm.nvidia import NvidiaClient
 
 
 class LLMRouter:
     def __init__(self):
-        self.local_client = OllamaClient()
         self.cloud_client = OpenRouterClient()
         self.nvidia_client = NvidiaClient()
 
@@ -44,6 +41,5 @@ class LLMRouter:
         return valid_results
 
     async def close(self) -> None:
-        await self.local_client.close()
         await self.cloud_client.close()
         await self.nvidia_client.close()

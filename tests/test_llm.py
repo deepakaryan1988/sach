@@ -1,13 +1,7 @@
 import pytest
 
-from app.llm.ollama import OllamaClient
 from app.llm.openrouter import OpenRouterClient
-from app.llm.router import LLMRouter
-
-
-def test_ollama_client_provider():
-    client = OllamaClient(base_url="http://localhost:11434", model="mistral")
-    assert client.provider == "local"
+from app.llm.nvidia import NvidiaClient
 
 
 def test_openrouter_client_provider():
@@ -17,6 +11,11 @@ def test_openrouter_client_provider():
         model="openrouter/elephant-alpha",
     )
     assert client.provider == "cloud"
+
+
+def test_nvidia_client_provider():
+    client = NvidiaClient(api_key="test_key")
+    assert client.provider == "nvidia"
 
 
 def test_judge_response_parsing():
